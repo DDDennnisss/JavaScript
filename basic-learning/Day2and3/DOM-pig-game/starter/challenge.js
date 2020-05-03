@@ -42,13 +42,13 @@ document.querySelector(".btn-hold").addEventListener("click", () => {
         score[activePlayer] += roundScore;
         document.querySelector("#score-" + activePlayer).textContent =
             score[activePlayer];
-        
+
         var inputScore = document.querySelector('.final-score').value;
         var winningScore;
 
-        if(inputScore){
+        if (inputScore) {
             winningScore = inputScore;
-        }else{
+        } else {
             winningScore = 100;
         }
 
