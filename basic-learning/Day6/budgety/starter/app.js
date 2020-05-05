@@ -33,21 +33,28 @@ var UIController = (function () {
 //GLOBAL APP CONTROLLER
 var controller = (function (budgetCtrl, UICtrl) {
 
-    var DOM = UICtrl.getDomString();
+    var setupAddEvent = function () {
+
+        var DOM = UICtrl.getDomString();
+
+        document.querySelector(DOM.getBtn).addEventListener('click', ctrlAddItem)
+        document.addEventListener('keypress', function (e) {
+
+            if (e.keyCode === 13 || e.which === 13) {
+                ctrlAddItem();
+            }
+        })
+    }
 
     var ctrlAddItem = function () {
         var input = UICtrl.getInput;
-        console.log(input)
     }
 
-    document.querySelector(DOM.getBtn).addEventListener('click', ctrlAddItem)
-
-    document.addEventListener('keypress', function (e) {
-
-        if (e.keyCode === 13 || e.which === 13) {
-            ctrlAddItem()
+    return {
+        init: function () {
+            setupAddEvent();
         }
-
-    })
-
+    }
 })(budgetController, UIController)
+
+controller.init()
