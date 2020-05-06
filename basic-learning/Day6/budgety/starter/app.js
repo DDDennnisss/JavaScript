@@ -33,7 +33,7 @@ var budgetController = (function () {
             } else {
                 ID = 0;
             }
-            console.log(data)
+
             if (type === 'inc') {
                 newItem = new Income(ID, des, val)
             } else if (type === 'exp') {
@@ -60,7 +60,10 @@ var UIController = (function () {
         getType: '.add__type',
         getDescription: '.add__description',
         getValue: '.add__value',
-        getBtn: '.add__btn'
+        getBtn: '.add__btn',
+        incomeContainer: '.income__list',
+        expenseContainer: '.expenses__list'
+
     }
 
     return {
@@ -70,6 +73,28 @@ var UIController = (function () {
                 description: document.querySelector(DomString.getDescription).value,
                 value: document.querySelector(DomString.getValue).value
             };
+        },
+
+        addListItem: function (obj, type) {
+
+            var html, newHTLM, element;
+
+            if (type === 'inc') {
+                element = DomString.incomeContainer;
+                html = '<div class="item clearfix" id="income-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div> ';
+            }
+            else if (type === 'exp') {
+                element = DomString.expenseContainer;
+                html = '<div class="item clearfix" id="income-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+            }
+
+            //change HTML
+            newHTLM = html.replace('%id%', obj.id);
+            newHTLM = newHTLM.replace('%description%', obj.description);
+            newHTLM = newHTLM.replace('%value%', obj.value);
+
+            //insert html
+            document.querySelector(element).insertAdjacentHTML('beforeend', newHTLM)
         },
 
         getDomString: function () {
@@ -96,8 +121,13 @@ var controller = (function (budgetCtrl, UICtrl) {
     }
 
     var ctrlAddItem = function () {
-        var input = UICtrl.getInput();
-        var newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+
+        var input, newItem;
+
+        input = UICtrl.getInput();
+        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+
+        UICtrl.addListItem(newItem, input.type);
     }
 
     return {
