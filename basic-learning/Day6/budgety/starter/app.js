@@ -139,7 +139,8 @@ var UIController = (function () {
         totalIncValue: '.budget__income--value',
         totalExpValue: '.budget__expenses--value',
         percentageLabel: '.budget__expenses--percentage',
-        container: '.container'
+        container: '.container',
+        expensePercentLabel: '.item__percentage',
     }
 
     return {
@@ -168,7 +169,6 @@ var UIController = (function () {
             newHTML = html.replace('%id%', obj.id);
             newHTML = newHTML.replace('%description%', obj.description);
             newHTML = newHTML.replace('%value%', obj.value);
-            newHTML = newHTML.replace('%percentage%', obj.percentage);
 
             //insert html
             document.querySelector(element).insertAdjacentHTML('beforeend', newHTML)
@@ -205,6 +205,25 @@ var UIController = (function () {
             else {
                 document.querySelector(DomString.percentageLabel).textContent = '---';
             }
+        },
+
+        displayPercentage: function (percentage) {
+            var label = document.querySelectorAll(DomString.expensePercentLabel); //Node list?
+
+            var nodeListForEach = function (list, callback) {
+                for (var i = 0; i < list.length; i++) {
+                    callback(list[i], i);
+                }
+            };
+
+            nodeListForEach(label, function (cur, index) {
+                if (percentage[index] > 0) {
+                    cur.textContent = percentage[index] + '%';
+                }
+                else {
+                    cur.textContent = '---';
+                }
+            })
         },
 
         getDomString: function () {
@@ -246,7 +265,7 @@ var controller = (function (budgetCtrl, UICtrl) {
 
         var percentage = budgetCtrl.getPercentage();
 
-        console.log(percentage);
+        UICtrl.displayPercentage(percentage);
 
     }
 
