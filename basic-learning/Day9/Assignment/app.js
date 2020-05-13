@@ -33,11 +33,11 @@ class Street extends Element {
 
     classifyStreet() {
         const classification = new Map();
-        type.set(1, 'tiny');
-        type.set(2, 'small');
-        type.set(3, 'normal');
-        type.set(4, 'big');
-        type.set(5, 'huge');
+        classification.set(1, 'tiny');
+        classification.set(2, 'small');
+        classification.set(3, 'normal');
+        classification.set(4, 'big');
+        classification.set(5, 'huge');
         console.log(`${this.name}, build in ${this.year}, is a ${classification.get(this.size)} street.`)
     }
 }
@@ -74,6 +74,11 @@ function reportPark(p) {
 function reportStreets(s) {
     console.log('-----------Street Report-----------')
 
+    const [totalLength, avgLength] = calcArr(s.map(el => el.length));
+    console.log(`Our ${s.length} streets have an average of ${Math.round(avgLength)} km`);
+
+    s.forEach(el => el.classifyStreet())
 }
 
 reportPark(allParks);
+reportStreets(allStreets)
