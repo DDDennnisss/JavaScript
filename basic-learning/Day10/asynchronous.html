@@ -9,18 +9,39 @@
   <body>
     <h1>Asynchronous JavaScript</h1>
     <script>
-      const second = () => {
+      // const second = () => {
+      //   setTimeout(() => {
+      //     console.log("Async Hey there");
+      //   }, 2000);
+      // };
+
+      // const first = () => {
+      //   console.log("Hey There!");
+      //   second();
+      //   console.log("the end");
+      // };
+      // first();
+
+      const callBackHell = () => {
         setTimeout(() => {
-          console.log("Async Hey there");
+          console.log("-----------");
+          setTimeout(() => {
+            console.log("-----------");
+            setTimeout(() => {
+              console.log("-----------");
+              setTimeout(() => {
+                console.log("-----------");
+                setTimeout(() => {
+                  console.log("-----------");
+                  setTimeout(() => {}, 2000);
+                  console.log("-----------");
+                }, 2000);
+              }, 2000);
+            }, 2000);
+          }, 2000);
         }, 2000);
       };
-
-      const first = () => {
-        console.log("Hey There!");
-        second();
-        console.log("the end");
-      };
-      first();
+      callBackHell();
     </script>
   </body>
 </html>
