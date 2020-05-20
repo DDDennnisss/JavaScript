@@ -4,7 +4,8 @@
   "description": "forkify project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "author": "Dennis",
   "license": "ISC",
@@ -16,7 +17,8 @@
     "install": "^0.13.0",
     "npm": "^6.14.5",
     "regenerator-runtime": "^0.13.5",
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {}
 }
