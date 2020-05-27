@@ -1,14 +1,14 @@
-import { elements } from "./base";
+import { element } from "./base";
 
-export const getInput = () => elements.searchInput.value;
+export const getInput = () => element.searchInput.value;
 
 export const clearInput = () => {
-    elements.searchInput.value = ''
+    element.searchInput.value = ''
 };
 
 export const clearResult = () => {
-    elements.searchResList.innerHTML = '';
-    elements.searchResPages.innerHTML = '';
+    element.searchResList.innerHTML = '';
+    element.searchResPages.innerHTML = '';
 }
 
 export const limitRecipeTitle = (title, limit = 17) => {
@@ -40,5 +40,9 @@ const renderRecipe = recipe => {
             </a>
         </li>
     `;
-    elements.searchResList.insertAdjacentHTML('beforeend', markup);
+    element.searchResList.insertAdjacentHTML('beforeend', markup);
 };
+
+export const renderResult = recipe => {
+    recipe.forEach(renderRecipe);
+}

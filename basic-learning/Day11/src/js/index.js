@@ -1,6 +1,6 @@
 import Search from './models/Search';
-import searchView from './views/searchView';
-import {element} from './views/base';
+import * as searchView from './views/searchView';
+import {element ,renderLoader, clearLoader} from './views/base';
 
 
 const state = {}
@@ -13,12 +13,21 @@ const controlSearch = async ()=>{
         state.search = new Search(query);
 
         searchView.clearInput();
-        searchView.clearResult()
-    }
+        searchView.clearResult();
+        renderLoader(element.searchRes);
+        try{
+            await state.search.getResult();
+            clearLoader();
+            
+            searchView.renderResult(state.search.result);
+        }catch(err){
+            alert('error');
+            clearLoader();
+        }
+   }
 }
 
-
-const search = new Search('pizza') 
-console.log(search)
-
-search.getResult()
+element.searchForm.addEventListener('submit', e => {
+    e.preventDefault();
+    controlSearch();
+})
