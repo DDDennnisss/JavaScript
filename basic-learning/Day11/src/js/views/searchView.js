@@ -43,6 +43,38 @@ const renderRecipe = recipe => {
     element.searchResList.insertAdjacentHTML('beforeend', markup);
 };
 
-export const renderResult = recipe => {
-    recipe.forEach(renderRecipe);
+const createButton = (type ,currPage) =>{
+    `<button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
+        <span>Page ${type === 'prev' ? currPage - 1 : currPage + 1}</span>
+        <svg class="search__icon">
+            <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
+        </svg>
+    </button>`
+}
+
+const renderButton = (currPage ,numResult ,resPerPage) => {
+    const pages = Math.ceil(numResult/resPerPage);
+
+    let button;
+    if(currPage === 1 && pages > 1){
+        button = createButton('next', currPage)
+    }
+    else if(currPage < pages){
+        button = `
+        ${createButton('prev', currPage)}
+        ${createButton('next', currPage)}        
+        `
+    }
+    else if(currPage === pages && pages > 1){
+        button = createButton('prev', currPage);
+    }
+    element.searchResPages.insertAdjacentHTML('afterbegin', button);
+}
+
+export const renderResult = (recipe, page = 1 , resPerPage = 10) => {
+    const start = (page - 1)*resPerPage;
+    const end = page*resPerPage;
+
+    recipe.slice(start, end).forEach(renderRecipe);
+    renderButton(page , recipe.length, resPerPage)
 }
