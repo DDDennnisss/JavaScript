@@ -18,9 +18,10 @@ const controlSearch = async ()=>{
         try{
             await state.search.getResult();
             clearLoader();
-            
+
             searchView.renderResult(state.search.result);
         }catch(err){
+            console.log(err)
             alert('error');
             clearLoader();
         }
@@ -30,4 +31,8 @@ const controlSearch = async ()=>{
 element.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
+})
+
+element.searchResPages.addEventListener('click', e =>{
+    const btn = e.target.closest('.btn-inline')
 })
