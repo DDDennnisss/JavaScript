@@ -45,6 +45,16 @@ export default class Recipe{
 
         const arrIng = this.ingredient.split(' ')
         const unitIndex = arrIng.findIndex( el2 => units.includes(el2));
+
+        let objIng;
+        if (unitIndex > -1){
+            const arrCount = arrIng.slice(0, unitIndex);
+
+            let count;
+            if(arrCount.length === 1){
+                count = eval(arrIngP[0].replace('-', '+'));
+            }
+        }
         return this.ingredients
     }
 }
