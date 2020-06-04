@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 export default class Recipe{
-    constructor(query){
-        this.query = query;
+    constructor(id){
+        this.id = id;
     }
 
     async getRecipe() {
         try {
-            const res = await axios(`https://forkify-api.herokuapp.com/api/search?&q=${this.query}`);
+            const res = await axios(`https://forkify-api.herokuapp.com/api/get?rId=${this.id}`);
             this.title = res.data.recipe.title;
             this.author = res.data.recipe.publisher;
             this.img = res.data.recipe.image_url;
@@ -15,7 +15,7 @@ export default class Recipe{
             this.ingredients = res.data.recipe.ingredients;        
         
         } catch (error) {
-            alert(error)
+            alert("Something wrong in Recipe.js")
         }
     }
 
@@ -55,7 +55,7 @@ export default class Recipe{
                 count = eval(arrIngP[0].replace('-', '+'));
             }
         }
-        return this.ingredients
+        return this.ingredients;
     }
 }
 
