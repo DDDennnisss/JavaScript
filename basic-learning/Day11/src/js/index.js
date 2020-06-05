@@ -54,6 +54,9 @@ const controlRecipe = async () => {
     if (id) {
         renderLoader(element.recipe)
 
+        if (state.search) searchView.highlightSelected(id)
+
+
         state.recipe = new Recipe(id);
         try {
             await state.recipe.getRecipe();

@@ -26,6 +26,10 @@ export const limitRecipeTitle = (title, limit = 17) => {
     return title;
 }
 
+export const highlightSelected = id => {
+    document.querySelector(`a[href="#${id}"]`).classList.add('results_link--active')
+}
+
 const renderRecipe = recipe => {
     const markup = `
     <li>
