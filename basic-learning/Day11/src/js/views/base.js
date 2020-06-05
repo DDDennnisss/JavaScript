@@ -11,11 +11,11 @@ export const element = {
 };
 
 export const elementStrings = {
-    loader : 'loader'
+    loader: 'loader'
 }
 
-export const renderLoader = parent =>{
-    const loader =`
+export const renderLoader = parent => {
+    const loader = `
     <div class="${elementStrings.loader}">
             <svg>
                 <use href="img/icons.svg#icon-cw"></use>
@@ -25,9 +25,9 @@ export const renderLoader = parent =>{
     parent.insertAdjacentHTML('afterbegin', loader);
 };
 
-export const clearLoader = () =>{
+export const clearLoader = () => {
     const loader = document.querySelector(`.${elementStrings.loader}`);
-    if(loader){
+    if (loader) {
         loader.parentElement.removeChild(loader);
     }
 }

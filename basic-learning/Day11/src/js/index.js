@@ -1,47 +1,42 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
-import {element ,renderLoader, clearLoader} from './views/base';
+import { element, renderLoader, clearLoader } from './views/base';
 
 
 const state = {}
 
-const controlSearch = async ()=>{
+const controlSearch = async () => {
     // 1) Get Input from view
-    // const query = searchView.getInput();
-    const query = 'pizza'
+    const query = searchView.getInput();
 
-    if(query){
+    if (query) {
         state.search = new Search(query);
 
         searchView.clearInput();
         searchView.clearResult();
         renderLoader(element.searchRes);
-        try{
+        try {
             await state.search.getResult();
             clearLoader();
 
             searchView.renderResult(state.search.result);
-        }catch(err){
+        } catch (err) {
             alert("Something wrong in index.js")
             clearLoader();
         }
-   }
+    }
 }
 
 element.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 })
-window.addEventListener('load', e => {
-    e.preventDefault();
-    controlSearch();
-})
 
-element.searchResPages.addEventListener('click', e =>{
+element.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline')
 
-    if(btn){
+    if (btn) {
         const goToPage = parseInt(btn.dataset.goto, 10);
         searchView.clearResult();
         searchView.renderResult(state.search.result, goToPage);
@@ -55,17 +50,19 @@ const controlRecipe = async () => {
     const id = window.location.hash.replace('#', '')
     console.log(id)
 
-    if(id){
+    if (id) {
         state.recipe = new Recipe(id);
-        try{
+        try {
             await state.recipe.getRecipe();
+            state.recipe.parseIngredients()
 
             state.recipe.calcTime();
             state.recipe.calcServing();
-            
+
             console.log(state.recipe)
-        }catch(err){
-            alert(err)
+        } catch (err) {
+            console.log(err)
+            alert("something wrong in controlRecipe")
         }
     }
 }
