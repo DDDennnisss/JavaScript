@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounce</title>
+</head>
+<body>
+  <button id="btn">Button</button>
+  <script>
+    const button = document.querySelector('button')
+    function test(){
+      console.log('test');
+    }
+    function debounce(func,delay){
+      let timer;
+      return function(){
+        let that = this;
+        let args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          func.apply(that,args); // 如果不这么做 this会指向window
+        },delay)
+      }
+    }
+  
+    button.addEventListener('click',debounce(test, 1000))
+  </script>
+</body>
+</html>

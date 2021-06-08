@@ -14,6 +14,7 @@ A repo to learn Javascript.
 | [Event Loop 解析](https://www.bilibili.com/video/BV1kf4y1U7Ln?from=search&seid=8220960353061504686) | 2021-06-02   |            |
 | [原型与原型链](https://www.bilibili.com/video/BV14s411E7qf?p=17&spm_id_from=pageDriver)             | 2021-06-04   | P15 -- P21 |
 | [执行上下文](https://www.bilibili.com/video/BV14s411E7qf?p=17&spm_id_from=pageDriver)               | 2021-06-04   | P22 -- P25 |
+| [call,bind,apply]，[防抖]                                                                           | 2021-06-07   |            |
 
 # 原型与原型链
 
