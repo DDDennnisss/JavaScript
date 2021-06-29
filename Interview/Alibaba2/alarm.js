@@ -9,10 +9,9 @@ function alarmC() {
 }
 
 function runAndWait(fn, time) {
-  return new Promise((resolve) => {
-    fn();
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve();
+      fn, resolve();
     }, time);
   });
 }
@@ -23,3 +22,4 @@ async function runAlarms() {
   await runAndWait(alarmC(), 1000)
   runAlarms()
 }
+runAlarms()

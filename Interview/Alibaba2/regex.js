@@ -1,11 +1,11 @@
 function isCamelCase(paramName) {
   if (!paramName) return false;
-  const regex = /^[a-z]([A-Za-z]+)?$/
+  const regex = /^[a-z]([A-Za-z0-9]+)?$/
   return regex.test(paramName)
 }
 
 // 测试
-console.log(isCamelCase('camel-Case'));
+console.log(isCamelCase('camelCase07'));
 // isCamelCase('');
 // isCamelCase('camel');
 // isCamelCase('PascalCase');
