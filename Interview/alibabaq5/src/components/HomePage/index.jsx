@@ -3,6 +3,7 @@ import PreNavbar from "../PreNavBar";
 import CarouselComponents from "./Carousel";
 import CardItem from "./CardItem";
 import Footer from "../Footer";
+import HoverDropdown from '../HoverButton';
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <CarouselComponents />
       <CardItem />
       <Footer />
+      <HoverDropdown />
     </div>
   );
 }
