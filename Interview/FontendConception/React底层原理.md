@@ -2,6 +2,16 @@
 
 #### React Router 原理
 
+#### `react-router-dom`和`react-router`和`history`库三者什么关系
+
+`history` 可以理解为`react-router`的核心，也是整个路由原理的核心，里面集成了`popState,history.pushState`等底层路由实现的原理方法
+
+`react-router`可以理解为是`react-router-dom`的核心，里面封装了`Router，Route，Switch`等核心组件,实现了从路由的改变到组件的更新的核心功能,在我们的项目中只要一次性引入`react-router-dom`就可以了。
+
+`react-router-dom`,在`react-router`的核心基础上，添加了用于跳转的`Link`组件，和histoy模式下的`BrowserRouter`和hash模式下的`HashRouter`组件等。所谓
+
+`BrowserRouter和HashRouter，也只不过用了history库中createBrowserHistory和createHashHistory方法`
+
 **Hash**
 
 hash的兼容性较好，因此在早期的前端路由中大量的采用，但是使用hash也有很多缺点。
@@ -11,9 +21,19 @@ hash的兼容性较好，因此在早期的前端路由中大量的采用，但�
 
 **History**
 
-History.pushState():pushState可以将给定的数据压入到浏览器会话历史栈中
+```history.pushState(state,title,path)```
 
-pushState()设置新的URL可以是任意与当前URL同源的URL，而hash只能改变#后面的内容，因此只能设置与当前URL同文档的URL
+pushState可以将给定的数据压入到浏览器会话历史栈中
+
+pushState设置新的URL可以是任意与当前URL同源的URL，而hash只能改变#后面的内容，因此只能设置与当前URL同文档的URL
+
+`state`：一个与指定网址相关的状态对象， popstate 事件触发时，该对象会传入回调函数。如果不需要可填 null。
+
+`title`：新页面的标题，但是所有浏览器目前都忽略这个值，可填 null。
+
+`path`：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个地址。
+
+
 
 hisory为依据来实现路由的优点：
 
@@ -73,3 +93,10 @@ hisory为依据来实现路由的优点：
 尽量减少跨层级的组件改动. 所以有来react的改版的diff算法，只比较同一级的元素，这样可以做到快速的比对，为O(n)，即使这样，在对比两棵树的时候，我们还是需要遍历所有的节点，我们知道dom的操作是昂贵的，即使是查找，也是昂贵的一个过程，特别是在节点很多的donm树下，所以虚拟dom应运而生，虚拟dom避开了直接操作dom的缺点，而是直接对比内存中vd，使得对比速度进一步得到质地提升。
 
  
+
+#### vue和react的区别是什么？
+
+T
+
+https://zhuanlan.zhihu.com/p/100228073#:~:text=%E8%80%8CVue%E6%98%AF%E9%80%9A%E8%BF%87%E4%B8%80,%E7%9A%84%EF%BC%8C%E6%9B%B4%E5%8A%A0%E7%BA%AF%E7%B2%B9%E6%9B%B4%E5%8A%A0%E5%8E%9F%E7%94%9F%E3%80%82
+

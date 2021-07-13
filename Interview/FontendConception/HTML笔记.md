@@ -88,3 +88,13 @@ parent.replaceChild(para, child);
 
 ![img](https://img-blog.csdnimg.cn/20181204183040123.png)
 
+字符编码
+
+XXXX -> 10110010101 编码
+
+10110010101-> XXXX  解码
+
+常见字符集
+
+UTF-8,
+
