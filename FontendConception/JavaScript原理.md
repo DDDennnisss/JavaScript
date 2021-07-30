@@ -1,5 +1,27 @@
 # JavaScript原理
 
+#### JS基本数据类型 和 引用数据类型
+
+**基本数据类型**
+
+1. String 字符串
+2. Number 数值
+3. Boolean 布尔值
+4. Null 空值： 使用type of 返回对象
+5. Undefined 未定义
+6. Symbol ES6
+
+
+
+**引用数据类型**
+
+1. Array 数组
+2. Object 对象
+3. Function 函数
+4. Date 类型
+
+
+
 #### 函数提升与变量提升
 
 **变量提升**
@@ -7,8 +29,6 @@
 只有声明被提升，初始化不会被提升
 
 声明会被提升到当前作用域的顶端
-
-
 
 **函数提升**
 
@@ -346,7 +366,6 @@ for(let [key, value] of mySet.entries()) console.log(key,value)
 const arr = [...mySet]
 const arr = Array.from(mySet)
 const intersection = new Set([...])
-// 
 ```
 
 
@@ -358,7 +377,7 @@ const intersection = new Set([...])
 3.普通函数中的this是动态的，而箭头函数中的this指向的是紧紧包裹箭头函数的那个对象（定义时决定的）
 4.箭头函数不能通过bind、call、apply来改变this的值，但依然可以调用这几个方法（只是this的值不受这几个方法控制）
 
-```
+```js
 //实现箭头函数有argument
 function normal(){
 	reuturn () => arguments.length;
@@ -368,3 +387,9 @@ let arrow = normal(1,2,3)
 console.log("今天吃了" + arrow() + "碗饭")
 ```
 
+1. URL 解析
+2. DNS 查询
+3. TCP 连接
+4. 处理请求
+5. 接受响应
+6. 渲染页面

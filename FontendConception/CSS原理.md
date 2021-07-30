@@ -2,6 +2,18 @@
 
 [Web前端HTML5&CSS3笔记](https://www.yuque.com/u21195183/hfcamg)
 
+#### Q&A
+
+```css
+vertical-align 还不是太懂。baseline top bottom middle
+
+transform-origin: 设置远点位置 默认0 0 
+
+transform: rotateZ(45deg) 绕Z轴顺时针旋转45度
+```
+
+
+
 #### 1. BFC原理及使用
 
 1. **BFC作用**
@@ -223,14 +235,6 @@ a:hover{
 
 
 
-#### Flex Box
-
-align-items, align-content, align-self;
-
-
-
-
-
 #### transition 过渡动画
 
  - 通过过渡可以指定一个属性发生变化时的切换方式
@@ -278,5 +282,111 @@ transition-delay: 过渡效果延迟
 						reverse 从to到from运行
 						alternate 从from向to运行 重复执行时动画时反向
 						alternate-reverse 从to向from运行 重复执行时动画时反向
+```
+
+
+
+#### Flex Box
+
+弹性盒
+
+```css
+flex-direction: row, row-reverse, column, column-reverse //主轴 侧轴设置
+flex-grow: //设置伸展, 设置成1可以等分类似导航栏li a元素
+flex-shirnk：设置收缩
+
+flex-flow: row nowrap; // direaction 和 wrap
+
+justify-content: 主轴上如何排列
+align-items： 辅轴上如何排列
+	stretch 默认值 将元素长度设置成相同值
+	baseline 基线对齐
+
+align-content: 辅轴空白空间的分布
+
+align-self: 用来覆盖当前弹性元素上的align-items
+比如 某组元素align-items: flex-start;
+	当你将中间某个元素设置 align-self：flex-end;那么这个单独元素就会覆盖之前的flex-start
+```
+
+
+
+### Meta属性
+
+#### viewport 视口
+
+- 视口就是屏幕用来显示网页区域的
+
+- 可以通过查看视口大小，用来观察css像素和物理像素的比值
+
+  默认情况：
+
+  ​	视口宽度 1920px (CSS像素)
+
+  ​					 1920px (物理像素)
+
+  ​					- 此时，css像素和物理像素的比是1:1
+
+- 可以改变视口大小，来改变css像素和物理像素的比值
+
+ 问题： 一个宽度为900px的网页在iphone6中要如何显示？
+
+​	默认情况下，移动端的网页都会将视口设置成980像素（css像素）
+
+​		以确保pc端网页可以在移动端正常访问，如果网页没有做适配移动端网页会全部呈现
+
+​		如果网页超过了980, 移动端的浏览器会自动对网页缩放已完整显示网页
+
+```html
+<meta name="viewport" content="width=device-width，initial-scale=1.0"
+```
+
+
+
+#### 移动端设置
+
+vw = viewport width;
+
+1vw = 1% 完美像素; 比如：iphone6 750px 
+
+```css
+html{
+	font-size: 0.133vw; // font最小只能设置成12px，小于12px的字体会被自动设置成12px
+}
+
+.div{
+    width: 100rem; 1 rem = 1 font-size
+}
+```
+
+
+
+#### 响应式布局
+
+媒体查询
+
+​	语法：@media 查询规则
+
+​	all 所有设备
+
+​	print 打印设备
+
+​	screen 带屏幕的设备 电脑手机都算
+
+​	speech 屏幕阅读器
+
+```css
+@media print,screen{
+	body{
+		...
+	}
+}
+
+样式切换的分界点，断点
+
+max-width = 768px   sm
+min-width = 768px	md
+min-width = 992px	lg
+min-width = 1200px	xl
 ```
 
