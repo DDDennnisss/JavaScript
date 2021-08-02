@@ -130,5 +130,50 @@ React 事件不能采用 return false 的方式来阻止浏览器的默认行为
 
 
 
-### 6. 用 useContext + useReducer 替代 redux
+### 6. 受控组件和非受控组件
+
+#### 6.1 受控组件
+
+<input>, <textarea>和<select> 通常自己维护state，并根据用户输入进行更新。而在React中，可变状态通常保存在state中只能用setState来改变state更新
+
+```js
+// 通过state来改变input value值
+<input value = {this.state.value} onChange = {this.handleChange}
+```
+
+
+
+#### 6.2 非受控组件
+
+不再是由react来托管，当不是为每一个状态更新都编写数据处理时，你可以用ref来重DOM节点中获取表单数据
+
+通过`defaultValue`来定义初始值
+
+```js
+this.input = React.createRef()
+// const input = useRef(null);
+
+handleSubmit(event){
+	alert('A name was submitted: ' + this.input.current.value) //如果用了createRef那么就可以在current上通过原生input的DOM来拿到value
+}
+
+<form onSubmit={this.handleSubmit}>
+	<input type='text' ref={this.input} defaultValue="Bob"/>
+</form> 
+```
+
+
+
+##### 6.2.1 文件输入
+
+用户需要上传文件到服务器，或者通过`fileAPI` 所以它始终是一个非受控组件，因为他的值只能受用户控制
+
+```js
+<input type="file" /> //文件操作必须要用到非受控组件
+    
+const fileOnSelect = () => {
+    setUploadMessage("Uploading ...");
+    const selectedFile = inputFile.current.files[0];
+  };
+```
 

@@ -1,6 +1,6 @@
 # JavaScript原理
 
-#### JS基本数据类型 和 引用数据类型
+### 1. JS基本数据类型 和 引用数据类型
 
 **基本数据类型**
 
@@ -22,7 +22,7 @@
 
 
 
-#### 函数提升与变量提升
+### 2. 函数提升与变量提升
 
 **变量提升**
 
@@ -46,7 +46,7 @@
 
 
 
-#### JavaScript This指向
+### 3. JavaScript This指向
 
 1. 作为普通函数直接调用，this指向window
 
@@ -58,7 +58,7 @@ fun();
 console.log(age);//报错，age is not defined，这里的age是fun()中的局部变量
 ```
 
-#### 闭包
+### 4. 闭包
 
 闭包：有权访问另一个函数作用域中的变量的函数；一般情况就是在一个函数中包含另一个函数。
 
@@ -121,7 +121,7 @@ cc = null // 让内部函数成为垃圾对象 ==》 回收闭包
 
 
 
-#### 继承
+### 5. 继承
 
 **方法一： 原型链继承**
 
@@ -269,7 +269,7 @@ class SmartPhone extends Phone{
 //Super.call()可以调用重写的父类的方法
 ```
 
-#### apply和call和bind的效果和异同
+### 6. apply和call和bind的效果和异同
 
 **相同点**
 
@@ -351,7 +351,7 @@ function getThis() {
 
 
 
-#### Set 作用
+### 7. Set 作用
 
 集合是**无序且唯一**
 
@@ -370,7 +370,7 @@ const intersection = new Set([...])
 
 
 
-#### 箭头函数和普通函数区别
+### 8. 箭头函数和普通函数区别
 
 1.箭头函数不能用new来创建构造函数的实例，普通函数可以（因为箭头函数创建的时候程序不会为它创建construct方法，也就是没有构造能力，用完就丢掉了，不像普通函数重复利用，因此也不需要构造函数原型，也就是不会自动生成prototype属性）
 2.程序不会给箭头函数创建arguments对象
@@ -387,9 +387,20 @@ let arrow = normal(1,2,3)
 console.log("今天吃了" + arrow() + "碗饭")
 ```
 
-1. URL 解析
-2. DNS 查询
-3. TCP 连接
-4. 处理请求
-5. 接受响应
-6. 渲染页面
+
+
+### 9. event.currentTarget( ) 和 event.target( ) 的区别
+
+这两个方法都是监听事件触发的目标。区别是，event.currentTarget( ) **会返回当前触发事件的元素**；而event.target( ) **会返回触发事件触发的源头元素**。
+
+#### 9.1 event.currentTarget()
+
+返回其监听器触发事件的节点，即当前处理该事件的元素、文档或窗口。包括冒泡和捕获事件
+
+<img src="https://img-blog.csdnimg.cn/20190413173103126.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom: 80%;" />
+
+#### 9.2 event.target( )
+
+target 事件属性可返回事件的目标节点（触发该事件的节点，也就是事件发生的源头，事件发生所绑定的那个节点），如生成事件的元素、文档或窗口。也就是说，监听冒泡或者捕获事件的 target，会返回事件发生的那个元素，而不是冒泡或者捕获事件触发的元素。
+
+<img src="https://img-blog.csdnimg.cn/20190413172821379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom:80%;" />
