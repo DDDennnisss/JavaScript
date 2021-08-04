@@ -404,3 +404,24 @@ console.log("今天吃了" + arrow() + "碗饭")
 target 事件属性可返回事件的目标节点（触发该事件的节点，也就是事件发生的源头，事件发生所绑定的那个节点），如生成事件的元素、文档或窗口。也就是说，监听冒泡或者捕获事件的 target，会返回事件发生的那个元素，而不是冒泡或者捕获事件触发的元素。
 
 <img src="https://img-blog.csdnimg.cn/20190413172821379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom:80%;" />
+
+
+
+### 10. 柯里化(Currying)
+
+柯里化（Currying）是一种关于函数的高阶技术。
+
+柯里化是一种函数的转换，它是指将一个函数从可调用的 `f(a, b, c)` 转换为可调用的 `f(a)(b)(c)`。
+
+柯里化不会调用函数。它只是对函数进行转换。
+
+```js
+function curry(f) { // curry(f) 执行柯里化转换
+  return function(a) {
+    return function(b) {
+      return f(a, b);
+    };
+  };
+}
+```
+

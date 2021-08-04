@@ -28,6 +28,15 @@ removeItem(index) {
       </ul>
 ```
 
+2. actionCreators.js
+
+   ```
+   ```
+
+   
+
+
+
 ### 1. Redux基本使用
 
 ![How to interact with the Redux store in a React app | by Rafael Cruz |  Medium](https://miro.medium.com/max/1176/1*NTKLDEcb018jQIjILxtp4Q.png)
