@@ -14,3 +14,27 @@ obj2.foo = 1;
 console.log(Object.keys(obj2)); // console: ["foo"]
 ```
 
+
+
+### 2. 不同类型转化为数组
+
+arguements
+
+```js
+const arr = Array.prototype.slice.call(arguements)
+```
+
+Object
+
+````js
+var obj = {
+    0:'one',
+    1:'two',
+    length: 2
+};
+obj = Array.from(obj); //object to array
+for(var k of obj){
+    console.log(k)
+}
+````
+

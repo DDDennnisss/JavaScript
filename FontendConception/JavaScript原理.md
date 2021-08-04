@@ -250,23 +250,7 @@ class SmartPhone extends Phone{
 **方法五： 寄生继承**
 
 ```js
-class Phone{
-	constructor(brand, price){
-        this.brand = brand
-        this.price = price
-    }
-    call(){
-        console.log('我可以打电话！')
-    }
-}
-class SmartPhone extends Phone{
-    constructor(brand, price, color, size){
-        super(brand,price)
-        this.color = color;
-        this.size = size;
-    }
-}
-//Super.call()可以调用重写的父类的方法
+
 ```
 
 ### 6. apply和call和bind的效果和异同
