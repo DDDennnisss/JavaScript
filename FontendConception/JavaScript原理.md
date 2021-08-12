@@ -409,3 +409,56 @@ function curry(f) { // curry(f) 执行柯里化转换
 }
 ```
 
+
+
+#### 11. Map 和 Object有什么区别
+
+1. **Object **本质上是哈希结构的键值对的集合，它只能用字符串、数字或者Symbol等简单数据类型当作键，这就带来了很大的限制。
+
+2. 填入Map的元素，会保持原有的顺序，而Object无法做到。
+
+3. Map可以直接拿到长度，而Object不行。
+
+4. 我们知道，对象其实就是在堆开辟了一块内存，其实Map的键存的就是这块内存的地址。只要地址不一样，就是两个不同的键，这就解决了同名属性的碰撞问题，而传统的Object显然做不到这一点。
+5. Map类继承了Object，并对Object功能做了一些拓展，**Map的键可以是任意的数据类型。**
+
+
+
+#### 12. 判断数据类型
+
+1. typeof 直接返回数据类型字段，但是无法判断数组、null、对象
+2. instanceof 判断某个实例是不是属于原型
+3. 使用 Object.prototype.toString.call()判断
+
+
+
+#### 13. new关键字 Js实现
+
+```js
+function newOperator(ctor){
+    if(typeof ctor !== 'function'){
+      throw 'newOperator function the first param must be a function';
+    }
+    // ES6 new.target 是指向构造函数
+    newOperator.target = ctor;
+    // 1.创建一个全新的对象，
+    // 2.并且执行[[Prototype]]链接
+    // 4.通过`new`创建的每个对象将最终被`[[Prototype]]`链接到这个函数的`prototype`对象上。
+    var newObj = Object.create(ctor.prototype);
+    // ES5 arguments转成数组 当然也可以用ES6 [...arguments], Aarry.from(arguments);
+    // 除去ctor构造函数的其余参数
+    var argsArr = [].slice.call(arguments, 1);
+    // 3.生成的新对象会绑定到函数调用的`this`。
+    // 获取到ctor函数返回结果
+    var ctorReturnResult = ctor.apply(newObj, argsArr);
+    // 小结4 中这些类型中合并起来只有Object和Function两种类型 typeof null 也是'object'所以要不等于null，排除null
+    var isObject = typeof ctorReturnResult === 'object' && ctorReturnResult !== null;
+    var isFunction = typeof ctorReturnResult === 'function';
+    if(isObject || isFunction){
+        return ctorReturnResult;
+    }
+    // 5.如果函数没有返回对象类型`Object`(包含`Functoin`, `Array`, `Date`, `RegExg`, `Error`)，那么`new`表达式中的函数调用会自动返回这个新的对象。
+    return newObj;
+}
+```
+

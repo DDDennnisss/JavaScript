@@ -104,3 +104,60 @@ export const cleanObject = (object) => {
     return result
 }
 ```
+
+
+
+#### 7. env 和 env.development 自动化切换
+
+```js
+// .env 部署上线地址
+REACT_APP_API_URL = http://online.com
+
+// .env.development 部署开发地址
+REACT_APP_API_URL = http://localhost:3001
+
+//使用
+const apiUrl = process.env.REACT_APP_API_URL
+fetch(`${apiUrl}`/projects).then(async res =>{
+    if(res.ok){
+        setList(await res.json())
+    }
+},[param])
+```
+
+
+
+### 8. 自定义 Custom hook 复用代码
+
+最优秀的代码复用方案
+
+```react
+const useMount = (callback) =>{
+	useEffect(()=>{
+		callback()
+	},[])
+}
+
+//使用，不需要写[]参数了 
+useMount(()=>{
+	...
+})
+
+// 用法
+const debounceParam = useDebounce(param,2000)
+
+// useDebounce
+export const useDebounce = (value, delay){
+    const [debounceValue, setDebounceValue] = useState(value)
+    
+    useEffect(()=>{
+        // 每次在value变化以后，设置一个定时器
+        const timeout = setTimeout(()=>setDebounceValue(value),delay)
+        // 每次再上一个useEffect处理完以后再运行
+        return () => clearTimeout(timeout)
+    },[value, delay])
+    
+    return debounceValue;
+}
+```
+

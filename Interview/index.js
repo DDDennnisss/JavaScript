@@ -53,13 +53,13 @@ function flatFn(arr){
   },[])
 }
 
-function deepClone(obj, cloneObj){
-  let cloneObj = cloneObj || {}
+function deepClone(obj){
+  let cloneObj = {}
 
   for(let i in obj){
     if(typeof obj[i] === 'object' && obj[i] !== null){
       cloneObj[i] = Array.isArray(obj[i])?[]:{}
-      deepClone(obj[i], cloneObj[i])
+      cloneObj[i] = deepClone(obj[i])
     }else{
       cloneObj[i] = obj[i]
     }
