@@ -435,6 +435,26 @@ function curry(f) { // curry(f) 执行柯里化转换
 #### 13. new关键字 Js实现
 
 ```js
+// 基础版
+function _new(target) {
+  if (typeof target !== "function")
+    throw new TypeError("target must be a function");
+
+  // 1. 创建一个全新的对象
+  var obj = {};
+  // 2. __proto__ 指向对象原型
+  obj.__proto__ = target.prototype;
+  // 3. 绑定上下文到 obj
+  var result = target.apply(obj, Array.prototype.slice.call(arguments, 1));
+
+  // 4.如果该函数没有返回对象，则返回新创建的对象
+  var isObject = typeof result === "object" && result !== null;
+  var isFunction = typeof result === "function";
+
+  return isObject || isFunction ? result : obj;
+}
+
+// 完整版
 function newOperator(ctor){
     if(typeof ctor !== 'function'){
       throw 'newOperator function the first param must be a function';

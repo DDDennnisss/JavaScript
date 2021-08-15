@@ -218,7 +218,9 @@ if(action.type === GET_LIST){
 
 
 
-### 4. Redux-chunk 和 Middleware中间件
+### 4. Redux-chunk 和 Redux-saga 中间件
+
+**所有的 side effect 操作，例如调用 api 获取数据等等都将在这里完成。**然后再经由 reducer 更新 state，最后传递到 view 完成 MVC 的数据流循环。
 
 ![img](https://img0.baidu.com/it/u=3659086970,512947615&fm=26&fmt=auto&gp=0.jpg)
 
@@ -249,5 +251,92 @@ const store = createStore(
     enhancer
 )
 export default store
+```
+
+
+
+普通action: 
+
+```js
+export function toggleTodo(index) {
+  return { type: TOGGLE_TODO, index }
+}
+```
+
+而 redux-thunk 的 action 可以是一 异步的 higher order function 高阶函数
+
+```js
+export const fetchData = args => async (dispatch, getState) => {
+  const state = getState();
+  const url = 'https://jsonplaceholder.typicode.com/users/' + args;
+
+  try {
+    const response = await fetch(url)
+      .then(resp => {
+        return resp;
+      })
+      .then(resp => resp.json());
+
+    dispatch({
+      type: REMOTE_DATA_RECEIVED,
+      data: response
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+```
+
+
+
+#### 4.3 **Redux-saga解决方案**
+
+中间件注册
+
+```js
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './root-reducer';
+import { watchFetchSaga } from './saga/fetchData.saga';
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(watchFetchSaga);
+```
+
+但是 saga 使用的仍然是普通的 action
+
+```JS
+// 这个 action 将由 saga 监听，并且出发 side effect 异步加载 api 操作
+export const fetchData = () => ({
+  type:  "START_FETCH_DATA"
+});
+
+// 这个 action 将由 saga 发出
+export const fetchSuccess = data => ({
+  type: "REMOTE_DATA_RECEIVED",
+  payload: data
+});
+```
+
+接下来就是注册 saga 相关 side effect 操作。下面的文件是 fetchData.saga.js
+
+```JS
+import { takeLatest, put } from "redux-saga/effects";
+
+function* fetchDataSaga(action){
+  try {
+    const response = yield fetch(action.url);
+    const data = yield response.json()
+    yield put(fetchSuccess(data));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export default function* watchFetchSaga(){
+  // saga 将监听此事件，takeLatest 表示仅仅只监听最新的此事件
+  yield takeLatest("START_FETCH_DATA", fetchDataSaga)
+}
 ```
 
