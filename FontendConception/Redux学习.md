@@ -28,13 +28,6 @@ removeItem(index) {
       </ul>
 ```
 
-2. actionCreators.js
-
-   ```
-   ```
-
-   
-
 
 
 ### 1. Redux基本使用
@@ -338,5 +331,82 @@ export default function* watchFetchSaga(){
   // saga 将监听此事件，takeLatest 表示仅仅只监听最新的此事件
   yield takeLatest("START_FETCH_DATA", fetchDataSaga)
 }
+```
+
+
+
+### 5.  React-redux
+
+```react
+// 挂载数据，并传递给reducer
+const mapStateToProps = (state) =>{
+    return {
+        inputValue: state.inputValue
+    }
+}
+// 挂载方法，并传递给reducer
+const mapDispatchToProps = (dispatch) => {
+    return{
+        changeInputValue(){
+            const action = {
+                type:'change_input_value',
+                value: e.target.value'
+            }
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+```
+
+
+
+### 6. Immutable.js
+
+可以生成一个immutable对象，假设reducer的state设置成一个immutable对象，那么reducer就不会出问题
+
+#### 为什么要用**Immutable**
+
+第一点，在没有使用**Immutable**之前操作store对象型数据的时候在不想修改原数据的时候通常的做法是复制一份，在复制的数据上做更新修改操作；但是每次deep-copy都要把整个对象递归的复制一份，如果遇到很复杂的对象型数据时，这样性能会很差；
+
+而现在使用了**Immutable**，当我们发生一个set操作的时候，**Immutable.js**只修改这个节点和受它影响的父节点，其它节点则进行共享，可以大大提高性能;这里在网上找到一张动图：
+
+<img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/5/22/16386b13e359ee9d~tplv-t2oaga2asx-watermark.awebp" alt="img" style="zoom:67%;" />
+
+第二点， 在react中的**shouldComponentUpdate**方法中，判断组件是否需要更新的时候；对于复杂的对象型数据，去对比两个对象的值是否相等是很麻烦的；而**Immutable**提供了 **is**方法，去判断两个**Immutable**对象值是否相等；
+
+第三点，由于Immutable提供了丰富的API，对于操作复杂的数据结构也变得很直观和方便；
+
+```react
+// 局部reducer
+import * as actionTypes from './actionTypes';
+import { fromJS } from 'immutable';
+
+const defaultState = fromJS({
+  focused: false
+})
+
+export default (state = defaultState, action) => {
+  if(action.type === actionTypes.SEARCH_FOCUS){
+    // immutable对象的set方法，会结合之前immutable对象的值
+    // 和设置的值，返回一个全新的对象
+    return state.set('focused', true)
+  }
+  if(action.type === actionTypes.SEARCH_BLUR){
+    return state.set('focused', false)
+  }
+  return state;
+}
+
+// 全局reducer
+import { combineReducers } from 'redux-immutable';
+import {reducer as headerReducer} from '../common/header/store';
+
+const reducer = combineReducers({
+  header: headerReducer
+})
+
+export default reducer;
 ```
 
