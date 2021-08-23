@@ -1,6 +1,6 @@
 
-class QueueElement{
-  constructor(ele, priority){
+class QueueElement {
+  constructor(ele, priority) {
     this.ele = ele;
     this.priority = priority;
   }
@@ -8,11 +8,11 @@ class QueueElement{
 
 const result = []
 
-function enqueue(ele, priority){
+function enqueue(ele, priority) {
   let q = new QueueElement(ele, priority)
 
-  for(let i = 0; i< result.length; i++){
-    if(result[i].priority>q.priority){
+  for (let i = 0; i < result.length; i++) {
+    if (result[i].priority > q.priority) {
       result.splice(i, 0, q)
     }
   }
@@ -20,47 +20,48 @@ function enqueue(ele, priority){
 }
 
 
-function dequeue(){
-  if(result.isEmpty()){
+function dequeue() {
+  if (result.isEmpty()) {
     return;
   }
   return result.shift()
 }
 
-Function.prototype.myBind = function(){
+Function.prototype.myBind = function () {
   let self = this;
-  let args = Array.prototype.slice.call(arguements)
-  let thisValue = args.shift()
-  return function(){
-    return self.apply(thisValue, args)
+  let args = Array.prototype.slice.call(arguments);
+  let thisValue = args.shift();
+  return function () {
+    self.apply(thisValue, args)
   }
 }
+}
 
-function debounce(fn,delay){
+function debounce(fn, delay) {
   let timer;
-  return function(){
+  return function () {
     let args = arguments;
     let that = this;
-    timer = setTimeout(function(){
-      fn.apply(that,args)
-    },delay) 
+    timer = setTimeout(function () {
+      fn.apply(that, args)
+    }, delay)
   }
 }
 
-function flatFn(arr){
-  return arr.reduce((res, item)=>{
-    res.concat(Array.isArray(item)?flatFn(item):item)
-  },[])
+function flatFn(arr) {
+  return arr.reduce((res, item) => {
+    res.concat(Array.isArray(item) ? flatFn(item) : item)
+  }, [])
 }
 
-function deepClone(obj){
+function deepClone(obj) {
   let cloneObj = {}
 
-  for(let i in obj){
-    if(typeof obj[i] === 'object' && obj[i] !== null){
-      cloneObj[i] = Array.isArray(obj[i])?[]:{}
+  for (let i in obj) {
+    if (typeof obj[i] === 'object' && obj[i] !== null) {
+      cloneObj[i] = Array.isArray(obj[i]) ? [] : {}
       cloneObj[i] = deepClone(obj[i])
-    }else{
+    } else {
       cloneObj[i] = obj[i]
     }
   }

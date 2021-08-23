@@ -1,6 +1,6 @@
 # HTML
 
-#### 行内元素 (inline element)
+### 1. 行内元素 (inline element)
 
 - 行内元素主要是用来包裹元素，主要使用<span>
 
@@ -36,7 +36,7 @@ audio 音频加入
 
 
 
-#### JavaScript HTML DOM 元素 (节点)新增，编辑，删除
+### 2. JavaScript HTML DOM 元素 (节点)新增，编辑，删除
 
 createElement，createTextNode，appendChild，insertBefore，removeChild，replaceChild
 
@@ -97,4 +97,19 @@ XXXX -> 10110010101 编码
 常见字符集
 
 UTF-8,
+
+
+
+### 3. 防止html代码转义为字符串
+
+防止转义dangerouslySetInnerHTML
+
+```html
+<Content dangerouslySetInnerHTML={{ __html: this.props.content }} />
+
+const defaultState = fromJS({
+  "title": "衡水中学，被外地人占领的高考工厂",
+  "content": "<img src='https://auto.epochtimes.com/uploaded_files/2017/6-20/4bb7f2ef74b948b99cd8c2ae20b0060d.jpg'/><p><b>2017年，衡水中学考上清华北大的人数是176人</b>，2016年是139人，再往前推到2015年，这个人数是119人。但是在这些辉煌的名单背后。</p>"
+})
+```
 

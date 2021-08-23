@@ -200,3 +200,86 @@ state: undefined
 
 #### 5.1 class 用 className代替， for 用 htmlFor代替
 
+#### 5.2 useMemo 就是 classComponents 的 PureComponent
+
+
+
+### 6. 动态路由传参
+
+#### 6.1 通过Params实现动态路由
+
+```js
+// App.js 设置动态路由
+<Route path='/detail/:id' exact component={Detail}></Route>
+
+// Detail/index.js
+componentDidMount() {
+    this.props.getDetail(this.props.match.params.id) //获取到路由id
+}
+
+// actionCreators.js 根据id配合后端提取对应数据
+export const getDetail = (id) => {
+  return (dispatch) => {
+    axios.get('/api/detail.json?id=' + id).then((res) => {
+      const result = res.data.data
+      dispatch(changeDetail(result.title, result.content))
+    })
+  }
+}
+
+// 用法
+<Link key={index} to={'/detail/' + item.get('id')} />
+```
+
+
+
+#### 6.2 通过search实现动态路由
+
+```js
+// App.js 设置动态路由
+<Route path='/detail' exact component={Detail}></Route>
+
+// Detail/index.js
+componentDidMount() {
+    this.props.getDetail(this.props.location.search) //获取到路由id ?id=1需要自己处理id去拿2
+}
+
+// actionCreators.js 根据id配合后端提取对应数据
+export const getDetail = (id) => {
+  return (dispatch) => {
+    axios.get('/api/detail.json?id=' + id).then((res) => {
+      const result = res.data.data
+      dispatch(changeDetail(result.title, result.content))
+    })
+  }
+}
+
+// 用法
+<Link key={index} to={'/detail?id' + item.get('id')} />
+```
+
+
+
+### 7. 按需加载react-loadable
+
+```react
+import React from 'react';
+import Loadable from 'react-loadable';
+ 
+const LoadableComponent = Loadable({
+  loader: () => import('./'),
+  loading(){
+	return <div>正在加载</div>
+  },
+});
+ 
+export default class App extends React.Component {
+  render() {
+    return <LoadableComponent/>;
+  }
+}
+
+// App.js 改变引入路径就可以按需加载了
+import Detail from './pages/detail/loadable.js';
+```
+
