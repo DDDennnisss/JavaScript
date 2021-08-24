@@ -350,7 +350,7 @@ const mapDispatchToProps = (dispatch) => {
         changeInputValue(){
             const action = {
                 type:'change_input_value',
-                value: e.target.value'
+                value: e.target.value,
             }
             dispatch(action)
         }

@@ -411,7 +411,7 @@ function curry(f) { // curry(f) 执行柯里化转换
 
 
 
-#### 11. Map 和 Object有什么区别
+### 11. Map 和 Object有什么区别
 
 1. **Object **本质上是哈希结构的键值对的集合，它只能用字符串、数字或者Symbol等简单数据类型当作键，这就带来了很大的限制。
 
@@ -424,7 +424,7 @@ function curry(f) { // curry(f) 执行柯里化转换
 
 
 
-#### 12. 判断数据类型
+### 12. 判断数据类型
 
 1. typeof 直接返回数据类型字段，但是无法判断数组、null、对象
 2. instanceof 判断某个实例是不是属于原型
@@ -432,7 +432,7 @@ function curry(f) { // curry(f) 执行柯里化转换
 
 
 
-#### 13. new关键字 Js实现
+### 13. new关键字 Js实现
 
 ```js
 // 基础版

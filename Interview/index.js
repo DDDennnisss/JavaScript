@@ -35,7 +35,6 @@ Function.prototype.myBind = function () {
     self.apply(thisValue, args)
   }
 }
-}
 
 function debounce(fn, delay) {
   let timer;

@@ -77,18 +77,24 @@ yarn add json-server
 
 ```js
 // 异步抓取数据
+const apiUrl = process.env.REACT_APP_API_URL
+
 useEffect(()=>{
-	fetch('...').then(async response => {
+	fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.personId}`).then(response => {
 		if(response.ok){
-		setList(await response.json())
+		setList(response.json())
 		}
 	})
 })
+
+
 ```
 
 
 
 ### 6. CleanObject
+
+避免param里的空数组
 
 ```js
 export const isFalsy = (value) => value === 0 ? true: !! value
@@ -160,4 +166,30 @@ export const useDebounce = (value, delay){
     return debounceValue;
 }
 ```
+
+
+
+### 9. qs.stringify()
+
+```react
+//如果后端返回的是name1，name2... 就需要写很多search
+useEffect(()=>{
+	fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.personId}`).then(response => {
+		if(response.ok){
+		setList(response.json())
+		}
+	})
+})
+
+//使用qs就能实现自动转换
+useEffect(()=>{
+	fetch(`${apiUrl}/projects?name=${qs.stringify(param)}`).then(response => {
+		if(response.ok){
+		setList(response.json())
+		}
+	})
+})
+```
+
+
 
