@@ -71,3 +71,38 @@ stu3.addObserver(teacher2);
 stu1.submitHomeWork();
 stu2.submitHomeWork();
 stu3.submitHomeWork();
+
+
+// Way 2
+class Subject {
+  constructor() {
+    this.state = 0;
+    this.observe = []
+  }
+  getState() {
+    return this.state;
+  }
+
+  setState(value) {
+    this.state = value;
+    this.observer.forEach((item) => {
+      item.update();
+    })
+  }
+
+  addObserver(ob) {
+    this.observe.push(ob);
+  }
+}
+
+class observe {
+  constructor(name, sub) {
+    this.name = name;
+    this.sub = sub;
+    this.sub.addObserver(this);
+  }
+
+  update() {
+    console.log(`${this.name} update, state:${this.sub.getState()}`);
+  }
+}

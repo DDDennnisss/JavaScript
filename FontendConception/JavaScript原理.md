@@ -250,7 +250,20 @@ class SmartPhone extends Phone{
 **方法五： 寄生继承**
 
 ```js
-
+function Father(...arr) {
+    this.some = '父类属性';
+    this.params = arr;
+}
+Father.prototype.someFn = function() {
+    console.log(1);
+}
+Father.prototype.someValue = '2';
+function Son() {
+    Father.call(this, 'xxxx');
+    this.text = '2222';
+}
+Son.protptype = Object.create(Father.prototype);
+Son.prototype.constructor = Son;
 ```
 
 ### 6. apply和call和bind的效果和异同
