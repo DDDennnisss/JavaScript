@@ -210,6 +210,16 @@ clear：both //自动生成一个margin-top防止重叠
 	white-space: hidden;
 	text-overflow: ellipsis;
 }
+
+/*** table-cell middle center组合使用 ***/
+.cell {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        width: 240px;
+        height: 180px;
+        border:1px solid #666;
+      }
 ```
 
 

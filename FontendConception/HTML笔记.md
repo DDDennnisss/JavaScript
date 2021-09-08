@@ -113,3 +113,99 @@ const defaultState = fromJS({
 })
 ```
 
+
+
+### 4. 检测浏览器是否支持HTML5功能
+
+- 在全局对象上检测属性；
+- 在创建的元素上检测属性；
+- 检测一个方法是否返回期望值；
+- 检测元素是否能保留值;
+
+**1. 在全局对象上检测属性**
+
+```html
+<script>
+        window.onload = function() {
+            if (window.applicationCache) {
+                document.write("Yes, your browser can use offline web applications.");
+            } else {
+                document.write("No, your browser cannot use offline web applications.");
+            }
+        }
+</script>
+```
+
+**2. 在创建的元素上检测属性**
+
+首先要创建一个元素，再检测其能否为DOM识别。比如，通过测试canvas元素的context属性，检测浏览器是否支持canvas元素：
+
+```html
+<script type="text/javascript">
+        window.onload = drawSquare;
+
+        function drawSquare () {
+            var canvas = document.getElementById('Simple.Square');
+            if (canvas.getContext) {
+                var context = canvas.getContext('2d');
+
+                context.fillStyle = "rgb(13, 118, 208)";
+                context.fillRect(2, 2, 98, 98);
+            } else {
+                alert("Canvas API requires an HTML5 compliant browser.");
+            }
+        }
+</script>
+<body>
+    <canvas id="Simple.Square" width="100" height="100"></canvas>
+</body>
+```
+
+**3. 检测一个方法是否返回期望值**
+
+在创建的元素上检测属性”所述那样，先检测是否支持该元素（比如video），再检测方法是否返回期望值：
+
+```html
+<script>
+        function videoCheck() {
+            return !!document.createElement("video").canPlayType;
+        }
+
+        function h264Check() {
+            if (!videoCheck) {
+            document.write("not");
+            return;
+            }
+
+            var video = document.createElement("video");
+            if (!video.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"')) {
+                document.write("not");
+            }
+            return;
+        }
+
+        document.write("Your browser does ");
+        h264Check();
+        document.write(" support H.264 video.");
+    </script>
+```
+
+**4. 检测元素是否能保留值**
+
+```html
+<script>
+        function rangeCheck() {
+            var i = document.createElement("input");
+            i.setAttribute("type", "range");
+            if (i.type == "text") {
+                document.write("not");
+            }
+            return;
+        }
+
+        document.write("Your browser does ");
+        rangeCheck();
+        document.write(" support the <code><input type=range></code> input type.");
+    </script>
+```
+
