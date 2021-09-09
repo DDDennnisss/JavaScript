@@ -1,5 +1,7 @@
 # React底层原理
 
+![重新认识React 生命周期| HK Talk](https://blog.hhking.cn/images/react-life-cycle/react-life-cycle-new.jpg)
+
 ### 1. React Router 原理
 
 #### 1.1 `react-router-dom`和`react-router`和`history`库三者什么关系
@@ -73,8 +75,6 @@ hisory为依据来实现路由的优点：
     }]
 }
 ```
-
-![image](https://user-gold-cdn.xitu.io/2019/1/17/16859f41c260b5f3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
 传统的diff算法，是需要跨级对比两个树之间的不同， 使用传统的 Diff 算法通过循环递归遍历节点进行对比，时间复杂度为O(n^3)，这样的对比是无法接受的，所以react提出了一个简单粗暴的diff算法，只对比同级元素，这样算法复杂度就变成了O(n)了，虽然不能做到最优的更新，但是时间复杂度大大减少，是一种平衡的算法，下面会提到
 
