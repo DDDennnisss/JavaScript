@@ -18,4 +18,15 @@ function hex2rgb(hex) {
 }
 
 
-console.log(hex2rgb('#fffffe'));
+
+let arr = ['1', '2', '3', '4', '5', '6']
+
+function reverse(arr) {
+  let newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(arr[arr.length - i - 1]);
+  }
+  return newArr;
+}
+
+console.log(reverse(arr));
