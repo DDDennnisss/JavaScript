@@ -1,21 +1,28 @@
 function hex2rgb(hex) {
-  let n = [];
-  let newArr = [];
-  if (hex.length === 4) {
-    n = hex.split('', 4).splice(1);
-    for (let i in n) {
-      result = parseInt(n[i], 16) * 16 + parseInt(n[i], 16)
-      newArr.push(result)
-    }
-  } else if (hex.length === 7) {
-    n = hex.split('', 7).splice(1);
-    for (let i = 0; i < n.length; i = i + 2) {
-      result = parseInt(n[i], 16) * 16 + parseInt(n[i + 1], 16)
-      newArr.push(result)
-    }
+  let rgbarr = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/.exec(sRGB)
+
+  if (rgbarr === null) {
+    return sRGB
+  } else {
+    let rgb = []
+    rgbarr.splice(1, 4).forEach(ele => {
+      if (ele > 255 || ele < 0) {
+        return sRGB
+      } else {
+        let a = parseInt(ele).toString(16)
+        if (a.length < 2) {
+          rgb.push('0' + a)
+        } else {
+          rgb.push(a)
+        }
+
+      }
+    })
+    return '#' + rgb.join('')
   }
-  return "rbg(" + newArr.toString() + ")";
 }
+
+console.log(rgb2hex('rgb(255,255,100)'));
 
 
 
@@ -29,4 +36,33 @@ function reverse(arr) {
   return newArr;
 }
 
-console.log(reverse(arr));
+
+function endsWithVowel(str) {
+  let newArr = [...str]
+  console.log(newArr[newArr.length - 1]);
+  if (
+    newArr[newArr.length - 1] === 'a' ||
+    newArr[newArr.length - 1] === 'e' ||
+    newArr[newArr.length - 1] === 'i' ||
+    newArr[newArr.length - 1] === 'o' ||
+    newArr[newArr.length - 1] === 'u'
+  )
+    return true;
+  else {
+    return false;
+  }
+}
+
+function namespace(oNamespace, sPackage) {
+  const newArr = sPackage.split('.');
+  let result = oNamespace;
+  for (let item of newArr) {
+    if (typeof result[item] !== 'object') {
+      result[item] = {}
+    }
+    result = result[item];
+  }
+  return oNamespace;
+}
+
+console.log(namespace({ a: { test: 1, b: 2 } }, 'a.b.c.d'));
