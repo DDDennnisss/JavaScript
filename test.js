@@ -22,7 +22,7 @@ function hex2rgb(hex) {
   }
 }
 
-console.log(rgb2hex('rgb(255,255,100)'));
+// console.log(rgb2hex('rgb(255,255,100)'));
 
 
 
@@ -65,4 +65,31 @@ function namespace(oNamespace, sPackage) {
   return oNamespace;
 }
 
-console.log(namespace({ a: { test: 1, b: 2 } }, 'a.b.c.d'));
+// console.log(namespace({ a: { test: 1, b: 2 } }, 'a.b.c.d'));
+
+
+const str = 'abaasdffggghhhjjkkgfddsssss3444343';
+
+function longChar(str) {
+  const obj = {}
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charAt(i);
+    if (obj[char]) {
+      obj[char]++;
+    } else {
+      obj[char] = 1;
+    }
+  }
+  console.log(obj);
+  let objChar = '';
+  let max = 0;
+  for (let j in obj) {
+    if (obj[j] > max) {
+      max = obj[j];
+      objChar = j;
+    }
+  }
+  console.log(objChar, max);
+}
+
+console.log(longChar(str));
